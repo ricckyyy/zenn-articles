@@ -30,6 +30,7 @@ Zennでは、画像は以下のように指定する必要があります：
 VS Codeでスクリーンショットを貼り付けると：
 
 ```markdown
+<!-- markdownlint-disable-next-line zenn-image-path -->
 ![alt text](../images/article-name/image.png)  # 相対パス
 ```
 
