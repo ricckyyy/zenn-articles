@@ -1,0 +1,9 @@
+{
+  "config": {
+    "default": true,
+    "MD033": false,
+    "MD041": false
+  },
+  "globs": ["articles/**/*.md"],
+  "customRules": [".markdownlint/rules/image-path-rule.js"]
+}

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preview": "npx zenn preview"
+    "preview": "npx zenn preview",
+    "lint:md": "markdownlint-cli2 \"articles/**/*.md\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"articles/**/*.md\""
   },
   "keywords": [],
   "author": "",
@@ -12,5 +14,9 @@
   "type": "commonjs",
   "dependencies": {
     "zenn-cli": "^0.4.5"
+  },
+  "devDependencies": {
+    "@types/markdownlint": "^0.13.0",
+    "markdownlint-cli2": "^0.20.0"
   }
 }
