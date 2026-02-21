@@ -3,9 +3,7 @@
     "default": true,
     "MD033": false,
     "MD040": false,
-    "MD041": false
-  },
-  "markdownlint.customRules": [
-    "${workspaceFolder}/.markdownlint/rules/image-path-rule.js"
-  ]
+    "MD041": false,
+    "customRules": [".markdownlint/rules/image-path-rule.js"]
+  }
 }
