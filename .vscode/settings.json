@@ -5,5 +5,8 @@
     "MD040": false,
     "MD041": false,
     "customRules": [".markdownlint/rules/image-path-rule.js"]
+  },
+  "markdown.copyFiles.destination": {
+    "/articles/**/*": "/images/${documentBaseName}/${fileName}"
   }
 }
