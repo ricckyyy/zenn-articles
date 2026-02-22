@@ -1,0 +1,30 @@
+#!/bin/sh
+# Zenn記事のMarkdownLintチェック（pre-commit hook）
+
+echo "🔍 Markdownlintチェック中..."
+
+# articlesディレクトリに変更があるかチェック
+if git diff --cached --name-only | grep -q "^articles/.*\.md$"; then
+    # Lintを実行
+    npm run lint:md
+    
+    LINT_RESULT=$?
+    
+    if [ $LINT_RESULT -ne 0 ]; then
+        echo ""
+        echo "❌ Markdownlintエラーが見つかりました"
+        echo ""
+        echo "以下のコマンドで自動修正を試してください："
+        echo "  npm run lint:md:fix"
+        echo ""
+        echo "修正後、再度コミットしてください。"
+        echo ""
+        echo "強制的にコミットする場合（非推奨）："
+        echo "  git commit --no-verify"
+        exit 1
+    fi
+    
+    echo "✅ Markdownlintチェック完了"
+fi
+
+exit 0
