@@ -293,15 +293,16 @@ Hooksによる自動品質チェックの流れ：
 
 ### 新規記事作成
 
-1. `prompts/new-article.md` をCopilot Chatに貼り付け
-2. 記事テーマを伝える
-3. 自動的にブランチ作成・ファイル生成
+1. GitHub Copilot Chatを開く
+2. チャット欄に `/` と入力して `.github/copilot-prompts/new-article.md` を検索して選択
+3. ファイル内容を読み込み、記事テーマを入力して実行（必要に応じて編集）
+4. 自動的にブランチ作成・ファイル生成が実行される想定
 
 ### 記事レビュー
 
-1. `prompts/article-review.md` をCopilot Chatに貼り付け
-2. 記事ファイルを指定
-3. チェックリストに沿ってレビュー実行
+1. GitHub Copilot Chatを開く
+2. チャット欄に `/` と入力して `.github/copilot-prompts/article-review.md` を検索して選択
+3. レビュー対象のファイルを指定し、チェックリストに沿ってレビューを実行（必要に応じて指示を編集）
 
 ### 品質チェック
 
