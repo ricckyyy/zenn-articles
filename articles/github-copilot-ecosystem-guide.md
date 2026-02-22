@@ -122,6 +122,14 @@ Instructionsを導入すると、AIの振る舞いが自動的に変わります
 3. `.github/copilot-prompts/new-article.md` を選択
 4. 記事の詳細（テーマ、タイトルなど）を入力して実行
 
+### ファイル名と配置の注意
+
+- Copilot Chatの`/`検索はファイル名をベースに候補を表示します。検索候補に出ない場合は、まずファイル名と配置を確認してください。
+- 推奨配置: `.github/copilot-prompts/` または `.github/prompts/` 配下に置くと見つけやすくなります。
+- 推奨命名: ファイル名に `prompt` を含める、または拡張子に `.prompt.md` を使うと `/test` のような短い検索語でも候補に出やすくなります（例: `new-article.prompt.md`, `test.prompt.md`）。
+- ファイルを保存してから Copilot Chat で `/` 検索してください。保存されていない編集中のファイルは候補に出ません。
+- それでも出ない場合は、VS Code のウィンドウ再読み込み（`Developer: Reload Window`）や Copilot 拡張の更新を試してください。
+
 ---
 
 ## 3. Skills（機能パック）
@@ -293,16 +301,15 @@ Hooksによる自動品質チェックの流れ：
 
 ### 新規記事作成
 
-1. GitHub Copilot Chatを開く
-2. チャット欄に `/` と入力して `.github/copilot-prompts/new-article.md` を検索して選択
-3. ファイル内容を読み込み、記事テーマを入力して実行（必要に応じて編集）
-4. 自動的にブランチ作成・ファイル生成が実行される想定
+1. `prompts/new-article.md` をCopilot Chatに貼り付け
+2. 記事テーマを伝える
+3. 自動的にブランチ作成・ファイル生成
 
 ### 記事レビュー
 
-1. GitHub Copilot Chatを開く
-2. チャット欄に `/` と入力して `.github/copilot-prompts/article-review.md` を検索して選択
-3. レビュー対象のファイルを指定し、チェックリストに沿ってレビューを実行（必要に応じて指示を編集）
+1. `prompts/article-review.md` をCopilot Chatに貼り付け
+2. 記事ファイルを指定
+3. チェックリストに沿ってレビュー実行
 
 ### 品質チェック
 
