@@ -30,6 +30,15 @@ GitHub CopilotとClaude Codeを併用している方、あるいはどちらを�
 - GitとGitHubの基礎知識
 - コマンドラインの基本操作
 
+## サンプルリポジトリ
+
+この記事の実装例は、以下のリポジトリで実際に動作しています。
+
+**[ricckyyy/zenn-articles](https://github.com/ricckyyy/zenn-articles)**
+
+各「実装例」セクションのリンクから、実際のファイルを参照できます。
+コードをそのままコピーして自分のリポジトリに使ってください。
+
 ---
 
 ## 7つの拡張機能 一覧
