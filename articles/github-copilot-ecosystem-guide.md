@@ -75,7 +75,9 @@ AIが自動的に読み込み、全ての提案に反映します。
 
 ### 実装例
 
-`.github/copilot-instructions.md`を作成：
+<!-- markdownlint-disable MD013 -->
+[`.github/copilot-instructions.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/copilot-instructions.md)
+<!-- markdownlint-enable MD013 -->
 
 ### 使用例
 
@@ -132,11 +134,11 @@ Claude Codeは `.github/copilot-instructions.md` を読みません。代わり�
 
 ### 実装例 1: 記事レビュー用
 
-`.github/prompts/article-review.prompt.md`：
+[`.github/prompts/article-review.prompt.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/prompts/article-review.prompt.md)：
 
 ### 実装例 2: 新規記事作成用
 
-`.github/prompts/new-article.prompt.md`：
+[`.github/prompts/new-article.prompt.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/prompts/new-article.prompt.md)：
 
 1. **画像ディレクトリ作成**
    - `images/[記事スラッグ]/` ディレクトリを作成
@@ -204,7 +206,7 @@ Promptsとの最大の違いは「**AIが自分でいつ使うかを判断でき
 
 ### 実装例: Zenn記事Lintスキル
 
-`.github/skills/zenn-article-lint/SKILL.md`：
+[`.github/skills/zenn-article-lint/SKILL.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/skills/zenn-article-lint/SKILL.md)：
 
 ### 使用例
 
@@ -347,11 +349,11 @@ git commitやpushなどのイベントで自動的に品質チェックを実行
 
 ### 実装例: Pre-commit Hook
 
-`.github/hooks/pre-commit`：
+[`.github/hooks/pre-commit`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/hooks/pre-commit)：
 
 ### セットアップ方法
 
-`.github/hooks/README.md`：
+[`.github/hooks/README.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/hooks/README.md)：
 
 ### 使用例
 
@@ -424,7 +426,7 @@ Git hooksはAI非依存のシェルスクリプトなので、Claude Codeでも�
 
 ### 実装例
 
-`.github/plugins/zenn-workflow/README.md`：
+[`.github/plugins/zenn-workflow/README.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/plugins/zenn-workflow/README.md)：
 
 ## 使い方
 
@@ -477,7 +479,8 @@ Prompts部分はClaude Code用に `.claude/skills/` へ移植が必要です。
 
 ### 実装例
 
-`.github/recipes/zenn-cli.md`：
+- [`.github/recipes/zenn-cli-commands.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/recipes/zenn-cli-commands.md)
+- [`.github/recipes/zenn-markdown-snippets.md`](https://github.com/ricckyyy/zenn-articles/blob/main/.github/recipes/zenn-markdown-snippets.md)
 
 ### 使用方法
 
