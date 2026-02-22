@@ -64,61 +64,22 @@ GitHub Copilotが自動的に読み込み、全ての提案に反映します。
 
 `.github/copilot-instructions.md`を作成：
 
-```markdown
-# GitHub Copilot Instructions
-
-## ブランチ運用ルール
-
-このリポジトリはFeature Branch Workflowを採用しています。
-
-### ブランチ命名規則
-
-- `article/[記事タイトル要約]` - 新規記事執筆
-- `update/[記事名]` - 既存記事の更新
-- `draft/[記事名]` - 下書き段階
-- `fix/[修正内容]` - 誤字脱字の修正
-
-### ワークフロー
-
-1. 作業開始時は必ず適切な名前のブランチを作成
-2. ブランチ上で記事を執筆・編集
-3. コミット前に `npm run lint:md` でLintチェック
-4. `npm run preview` でプレビュー確認
-5. Pull Requestを作成してレビュー
-6. 問題なければmainブランチにマージ
-
-### 注意事項
-
-- mainブランチへの直接コミットは避ける
-- 複数記事を並行作業する場合は、それぞれ別のブランチで管理
-- マージ後は作業ブランチを削除
-
-## Zenn記事のルール
-
-- 記事ファイルは `articles/` ディレクトリに配置
-- 画像は `images/[記事スラッグ]/` ディレクトリに配置
-- Markdownlintのルールに従う
-```
-
 ### 使用例
+
+Instructionsを導入すると、AIの振る舞いが自動的に変わります。
 
 **Before（Instructionsなし）**：
 
-```text
-あなた: 「新しい記事を書きたい」
-AI: 記事ファイルを作成します
-```
+1. 「新しい記事を書きたい」と依頼
+2. 単に記事ファイルを作成するだけ
 
 **After（Instructionsあり）**：
 
-```text
-あなた: 「新しい記事を書きたい」
-AI: [自動的に]
-    1. article/記事名 ブランチを作成
-    2. articles/ディレクトリに記事ファイル作成
-    3. images/記事名/ ディレクトリ作成
-    4. Lint実行を提案
-```
+1. 「新しい記事を書きたい」と依頼
+2. AIが自動的に `article/記事名` ブランチを作成
+3. `articles/` ディレクトリに記事ファイルを作成
+4. `images/記事名/` ディレクトリを作成
+5. Lint実行を提案
 
 ---
 
@@ -140,65 +101,9 @@ AI: [自動的に]
 
 `.github/copilot-prompts/article-review.md`：
 
-```markdown
-# Zenn記事レビュープロンプト
-
-以下の観点で記事をレビューしてください：
-
-## チェック項目
-
-### 1. 技術的正確性
-
-- [ ] コードサンプルは動作するか
-- [ ] 技術用語は正しく使われているか
-- [ ] 非推奨の機能を使っていないか
-
-### 2. 文章品質
-
-- [ ] 誤字脱字はないか
-- [ ] わかりやすい表現か
-- [ ] 段落構成は適切か
-
-### 3. Zenn記法
-
-- [ ] メタデータ（title, emoji, type, topics）は正しいか
-- [ ] 画像パスは正しいか（`/images/[slug]/`）
-- [ ] コードブロックに言語指定があるか
-
-### 4. Markdown品質
-
-- [ ] Markdownlintルールに準拠しているか
-- [ ] 見出しレベルは適切か（H1は使わない）
-- [ ] リンクは正しく設定されているか
-```
-
 ### 実装例 2: 新規記事作成用
 
 `.github/copilot-prompts/new-article.md`：
-
-```markdown
-# 新規Zenn記事作成プロンプト
-
-以下の手順で新しいZenn記事を作成してください：
-
-1. **ブランチ作成**
-   - `article/[記事タイトルの要約]` で新しいブランチを作成
-
-2. **記事ファイル作成**
-   - `articles/` ディレクトリに `.md` ファイルを作成
-   - スラッグは英数字とハイフンのみ使用
-
-3. **メタデータ設定**
-
-   ```yaml
-   ---
-   title: "記事タイトル"
-   emoji: "📝"
-   type: "tech" # または "idea"
-   topics: ["トピック1", "トピック2"]
-   published: false
-   ---
-   ```
 
 1. **画像ディレクトリ作成**
    - `images/[記事スラッグ]/` ディレクトリを作成
@@ -212,13 +117,10 @@ AI: [自動的に]
 
 ### 使用方法
 
-```bash
-# VS Codeで使う場合
-# 1. プロンプトファイルを開く
-# 2. 内容をコピー
-# 3. GitHub Copilot Chatに貼り付け
-# 4. 記事内容を追加して実行
-```
+1. GitHub Copilot Chatを開く
+2. チャットに `/` と入力してファイルを検索
+3. `.github/copilot-prompts/new-article.md` を選択
+4. 記事の詳細（テーマ、タイトルなど）を入力して実行
 
 ---
 
@@ -252,74 +154,23 @@ AI: [自動的に]
 
 `.github/copilot-skills/zenn-article-lint/SKILL.md`：
 
-````markdown
----
-name: zenn-article-lint
-description: Zenn記事のMarkdownLintチェックと自動修正を行う
-version: 1.0.0
-triggers:
-  - "lint"
-  - "記事をチェック"
-  - "Markdownlint"
----
-
-# Zenn Article Lint Skill
-
-Zenn記事のMarkdownLintチェックと自動修正を実行します。
-
-## 使い方
-
-ユーザーが以下のように依頼したときにこのSkillを使用：
-
-- 「記事をlintして」
-- 「Markdownをチェックして」
-- 「記事の品質をチェック」
-
-## 実行手順
-
-1. **Lintチェック実行**
-
-   ```bash
-   npm run lint:md
-   ```
-
-2. **エラーがある場合**
-   - エラー内容を確認
-   - `references/common-errors.md` を参照して解決策を提示
-   - 自動修正可能なら `npm run lint:md:fix` を実行
-
-3. **修正後の確認**
-   - 再度lintを実行して全てのエラーが解消されたか確認
-
-## よくあるエラーと解決策
-
-詳細は `references/common-errors.md` を参照してください。
-
-### MD013: 行が長すぎる
-
-**解決策**: 80文字以内に改行を入れる
-
-### MD040: コードブロックに言語指定がない
-
-**解決策**: コードブロックの開始に言語を指定
-
-```markdown
-\```javascript
-// コード
-\```
-```
-````
-
 ### 使用例
 
-```text
-あなた: 「記事をlintして」
-AI: [zenn-article-lint Skillを発動]
-    1. npm run lint:md を実行
-    2. エラーを検出
-    3. common-errors.mdを参照して解決策を提示
-    4. 自動修正コマンドを提案
-```
+Skillを使うと、複雑なタスクが自動化されます。
+
+1. 「記事をlintして」と依頼（`triggers` に近い表現を推奨）
+2. AIが依頼内容を解釈し、zenn-article-lint Skillを選択
+3. `npm run lint:md` を自動実行
+4. エラーを検出
+5. `common-errors.md` を参照して解決策を提示
+6. 自動修正コマンド (`npm run lint:md:fix`) を提案
+
+**Skillの発動について**
+
+- Skillは `SKILL.md` の `triggers` フィールドに基づいて発動
+- 完全一致でなくても、意味的に類似していれば発動することもある
+- 例: 「lint実行して」「記事チェックして」なども発動する可能性あり
+- より確実に発動させたい場合は、triggersに記載された表現を使う
 
 ---
 
@@ -339,21 +190,16 @@ AI: [zenn-article-lint Skillを発動]
 
 ### Zennリポジトリでの適用例
 
-Zenn記事執筆リポジトリでAgentを使うなら：
+Article Publisher Agent（記事公開エージェント）の動作イメージ：
 
-```text
-Article Publisher Agent（記事公開エージェント）
-
-あなた: 「記事を公開して」
-Agent: [自動的に]
-  1. 記事の完成度をチェック
-  2. Lintエラーがないか確認
-  3. 画像リンク切れチェック
-  4. プレビューで確認
-  5. mainブランチにマージ
-  6. published: true に変更
-  7. GitHubにプッシュ
-```
+1. 「記事を公開して」と依頼
+2. Agentが記事の完成度をチェック
+3. Lintエラーがないか確認
+4. 画像リンク切れチェック
+5. プレビューで確認
+6. mainブランチにマージ
+7. `published: true` に変更
+8. GitHubにプッシュ
 
 ### 注意点
 
@@ -371,100 +217,42 @@ Agentの実装はMCPサーバーとの連携が必要で、
 
 git commitやpushなどのイベントで自動的に品質チェックを実行します。
 
+> **⚠️ 重要：HooksはAI機能ではありません**
+>
+> Hooksは通常のGit hooksスクリプトで、GitHub CopilotやAIとは無関係です。
+> この記事では、GitHub Copilot環境と組み合わせて使える開発ツールとして紹介しています。
+
 ### 特徴
 
 - ✅ 自動実行なので忘れない
 - ✅ git hooksやGitHub Actionsと連携
 - ✅ チーム全体で品質を担保
+- ⚠️ AIは使わず、シェルスクリプトで動作
 
 ### 実装例: Pre-commit Hook
 
 `.github/hooks/pre-commit`：
 
-```bash
-#!/bin/sh
-# Zenn記事のMarkdownLintチェック（pre-commit hook）
-
-echo "🔍 Markdownlintチェック中..."
-
-# articlesディレクトリに変更があるかチェック
-if git diff --cached --name-only | grep -q "^articles/.*\.md$"; then
-    # Lintを実行
-    npm run lint:md
-    
-    LINT_RESULT=$?
-    
-    if [ $LINT_RESULT -ne 0 ]; then
-        echo ""
-        echo "❌ Markdownlintエラーが見つかりました"
-        echo ""
-        echo "以下のコマンドで自動修正を試してください："
-        echo "  npm run lint:md:fix"
-        echo ""
-        echo "修正後、再度コミットしてください。"
-        exit 1
-    fi
-    
-    echo "✅ Markdownlintチェック完了"
-fi
-
-exit 0
-```
-
 ### セットアップ方法
 
 `.github/hooks/README.md`：
 
-```markdown
-# Git Hooksセットアップ
-
-## インストール方法
-
-\```bash
-# フックスクリプトを.git/hooksにコピー
-cp .github/hooks/pre-commit .git/hooks/pre-commit
-
-# 実行権限を付与
-chmod +x .git/hooks/pre-commit
-\```
-
-## 動作確認
-
-\```bash
-# 記事を編集
-echo "test" >> articles/test-article.md
-
-# コミットを試みる（hookが自動実行される）
-git add articles/test-article.md
-git commit -m "test"
-\```
-
-## 一時的に無効化したい場合
-
-\```bash
-# --no-verifyオプションを使用
-git commit --no-verify -m "commit message"
-\```
-```
-
 ### 使用例
 
-```text
-# 記事を編集
-vim articles/new-article.md
+Hooksによる自動品質チェックの流れ：
 
-# コミット実行
-git add articles/new-article.md
-git commit -m "記事追加"
-
-→ [pre-commit hookが自動実行]
-  🔍 Markdownlintチェック中...
-  ❌ Markdownlintエラーが見つかりました
-  
-  npm run lint:md:fix を実行してください
-  
-→ コミットが中断される（品質保証）
-```
+1. 記事を編集（例: `vim articles/new-article.md`）
+2. 変更をステージング（`git add articles/new-article.md`）
+3. コミットを実行（`git commit -m "記事追加"`）
+4. **pre-commit hookが自動実行される**
+5. 🔍 Markdownlintチェックが走る
+6. エラーが見つかった場合：
+   - ❌ エラーメッセージが表示される
+   - `npm run lint:md:fix` を実行するよう促される
+   - コミットが中断される（品質保証）
+7. エラーがない場合：
+   - ✅ チェック完了
+   - コミットが正常に完了
 
 ---
 
@@ -501,47 +289,6 @@ git commit -m "記事追加"
 
 `.github/plugins/zenn-workflow/README.md`：
 
-```markdown
-# Zenn Workflow Plugin
-
-Zenn記事執筆に必要な全ての機能をまとめたプラグインです。
-
-## 含まれる機能
-
-### Prompts（テンプレート）
-
-- `prompts/new-article.md` - 新規記事作成ガイド
-- `prompts/article-review.md` - 記事レビューチェックリスト
-
-### Skills（自動化）
-
-- `skills/zenn-article-lint/` - Lint + 修正スキル
-
-### Hooks（品質保証）
-
-- `hooks/pre-commit` - commit前の自動Lintチェック
-
-## セットアップ方法
-
-### 1. Promptsを配置
-
-\```bash
-cp prompts/* ../.github/copilot-prompts/
-\```
-
-### 2. Skillsを配置
-
-\```bash
-cp -r skills/* ../.github/copilot-skills/
-\```
-
-### 3. Hooksをインストール
-
-\```bash
-cp hooks/pre-commit ../../../.git/hooks/
-chmod +x ../../../.git/hooks/pre-commit
-\```
-
 ## 使い方
 
 ### 新規記事作成
@@ -560,7 +307,6 @@ chmod +x ../../../.git/hooks/pre-commit
 
 - コミット時に自動でLint実行（hook）
 - 手動でlintしたい場合は「記事をlintして」と依頼（skill）
-```
 
 ---
 
@@ -582,111 +328,23 @@ chmod +x ../../../.git/hooks/pre-commit
 
 `.github/recipes/zenn-cli.md`：
 
-````markdown
-# Zenn CLI レシピ集
+（実装内容は記事の全文を参照してください）
 
-## 新規記事作成
+### 使用方法
 
-\```bash
-# スラッグ指定で記事作成
-npx zenn new:article --slug my-awesome-article
+Recipesはリファレンスとして活用します。
 
-# エディタで開く
-code articles/my-awesome-article.md
-\```
+1. `.github/recipes/zenn-cli.md` をエディタで開く
+2. 必要なコマンドやコードを探す
+3. コピーしてターミナルやエディタに貼り付け
+4. 必要に応じてパラメータを変更して実行
 
-## 画像の追加
-
-\```bash
-# 記事用の画像ディレクトリ作成
-mkdir -p images/my-awesome-article
-
-# 画像をコピー
-cp ~/Downloads/screenshot.png images/my-awesome-article/
-
-# 記事から参照
-# ![説明](/images/my-awesome-article/screenshot.png)
-\```
-
-## プレビュー
-
-\```bash
-# ローカルサーバー起動
-npm run preview
-
-# ブラウザで確認
-# http://localhost:8000
-\```
-
-## Lintチェック
-
-\```bash
-# 全記事をチェック
-npm run lint:md
-
-# 自動修正
-npm run lint:md:fix
-
-# 特定のファイルだけチェック
-npx markdownlint-cli2 articles/specific-article.md
-\```
-
-## ブランチ運用
-
-\```bash
-# 新規記事用ブランチ作成
-git checkout -b article/my-awesome-article
-
-# 記事執筆後
-git add articles/my-awesome-article.md images/my-awesome-article/
-git commit -m "記事追加: すごい記事のタイトル"
-
-# リモートにプッシュ
-git push -u origin article/my-awesome-article
-
-# GitHub上でPull Request作成
-# マージ後、ブランチ削除
-git checkout main
-git pull
-git branch -d article/my-awesome-article
-\```
-
-## メタデータテンプレート
-
-\```yaml
----
-title: "記事のタイトル（60文字以内推奨）"
-emoji: "📝"  # https://getemoji.com/ で探す
-type: "tech" # tech: 技術記事 / idea: アイデア記事
-topics: ["javascript", "react", "nextjs"] # 最大5つ、小文字のみ
-published: false  # true: 公開 / false: 下書き
----
-\```
-
-## トピックの選び方
-
-\```yaml
-# 良い例（具体的な技術名）
-topics: ["react", "typescript", "vite", "tailwindcss"]
-
-# 避けるべき例（抽象的すぎる）
-topics: ["プログラミング", "フロントエンド", "初心者"]
-\```
-
-## 絵文字の選び方
-
-\```yaml
-# 記事の内容に合わせて選ぶ
-"🎯" # 目標・ベストプラクティス
-"📝" # 記事・ドキュメント
-"🚀" # パフォーマンス・デプロイ
-"🔧" # ツール・設定
-"💡" # アイデア・ヒント
-"⚠️" # 注意・トラブルシューティング
-"🎨" # デザイン・UI
-"📊" # データ・分析
-\```
-````
+> **💡 Recipesの活用シーン**
+>
+> - 「あのコマンド何だっけ？」というときの早見表
+> - 新メンバーへのオンボーディング資料
+> - コマンド実行のベストプラクティス集
+> - プロジェクト固有の運用ルールの記録
 
 ---
 
