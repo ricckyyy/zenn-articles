@@ -1,8 +1,8 @@
 ---
-title: "GitHub Copilot 7つの拡張機能を実装して理解する完全ガイド"
+title: "GitHub Copilot & Claude Code 拡張機能を比較して理解する完全ガイド"
 emoji: "🎯"
 type: "tech"
-topics: ["githubcopilot", "ai", "vscode", "開発効率化", "zenn"]
+topics: ["githubcopilot", "claudecode", "ai", "vscode", "開発効率化"]
 published: false
 ---
 
@@ -12,10 +12,10 @@ GitHub Copilotには、**Instructions、Prompts、Skills、Agents、Hooks、Plug
 Cookbook Recipes**という7つのカスタマイズ機能があります。
 
 一見似ているようで、それぞれ異なる役割があります。
-この記事では、**7つ全てを実際にZenn記事執筆リポジトリに導入しながら**、
-その違いと使い方を解説します。
+この記事では、**7つ全てを実際にZenn記事執筆リポジトリに導入しながら**、その違いと使い方を解説します。
 
-また、各機能について **Claude Code（Anthropic製CLIエージェント）でも使えるか** も合わせて解説します。
+さらに、各機能について **Claude Code（Anthropic製CLIエージェント）でも使えるか**を比較します。
+GitHub CopilotとClaude Codeを併用している方、あるいはどちらを使うか検討中の方の参考になれば幸いです。
 
 ## この記事のゴール
 
@@ -26,7 +26,7 @@ Cookbook Recipes**という7つのカスタマイズ機能があります。
 
 ## 前提知識
 
-- GitHub Copilotの基本的な使い方
+- GitHub CopilotまたはClaude Codeの基本的な使い方
 - GitとGitHubの基礎知識
 - コマンドラインの基本操作
 
@@ -35,6 +35,8 @@ Cookbook Recipes**という7つのカスタマイズ機能があります。
 ## 7つの拡張機能 一覧
 
 まず全体像を把握しましょう。
+
+<!-- markdownlint-disable MD013 -->
 
 | 拡張機能 | 役割 | 自動実行 | 用途 | 使い分け | Claude Code |
 | -------- | ---- | -------- | ---- | -------- | ----------- |
@@ -45,6 +47,8 @@ Cookbook Recipes**という7つのカスタマイズ機能があります。
 | **Hooks** | イベントトリガー | ○ | 品質チェック自動化 | コミット時やCIで自動チェックを実行したい場合 | ✅ Git hooksはそのまま使える |
 | **Plugins** | 機能セット | - | チーム共有 | Prompts/Skills/Hooksをまとめて共有したい場合 | △ 独自のPlugin機能あり |
 | **Recipes** | サンプルコード集 | × | 学習・参照 | よく使うコマンドやスニペットを記録・共有したい場合 | ✅ 手動参照なのでそのまま使える |
+
+<!-- markdownlint-enable MD013 -->
 
 ---
 
@@ -144,9 +148,11 @@ Claude Codeは `.github/copilot-instructions.md` を読みません。代わり�
 Claude Codeは `.github/prompts/` を `/` メニューで呼び出す仕組みを持ちません。
 ただし、同等の機能を **Skills** で実現できます。
 
-```
+<!-- markdownlint-disable MD013 -->
+```text
 .claude/skills/new-article/SKILL.md  → /new-article として呼び出し可能
 ```
+<!-- markdownlint-enable MD013 -->
 
 既存の `.github/prompts/*.prompt.md` の内容を `.claude/skills/` に移植することで、Claude Codeでも `/` コマンドで呼び出せるようになります。
 
@@ -560,8 +566,7 @@ CLAUDE.md                          # 1. Instructions（Claude Code用）
 
 ## まとめ
 
-この記事では、GitHub Copilotの7つの拡張機能を
-実際にZenn記事執筆リポジトリに導入しました。
+この記事では、GitHub Copilotの7つの拡張機能を実際にZenn記事執筆リポジトリに導入しながら、Claude Codeでの対応状況も合わせて解説しました。
 
 ### 7つの違い おさらい
 
@@ -580,7 +585,7 @@ CLAUDE.md                          # 1. Instructions（Claude Code用）
 3. チームメンバーと共有
 4. 定期的に見直して改善
 
-GitHub Copilotの真価は、これらの機能を組み合わせることで発揮されます。
+GitHub CopilotとClaude Code、それぞれの強みを活かしながらこれらの機能を組み合わせることで、開発体験が大きく向上します。
 まずは小さく始めて、徐々に拡張していきましょう！
 
 ---
@@ -596,4 +601,4 @@ GitHub Copilotの真価は、これらの機能を組み合わせることで発
 
 ---
 
-この記事が、GitHub Copilotエコシステムの理解と活用の助けになれば幸いです！
+この記事が、GitHub Copilot・Claude Codeエコシステムの理解と活用の助けになれば幸いです！
