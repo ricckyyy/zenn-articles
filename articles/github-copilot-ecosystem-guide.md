@@ -62,9 +62,16 @@ AIが自動的に読み込み、全ての提案に反映します。
 
 ### 特徴
 
-- ✅ 自動読み込み
-- ✅ 常時有効
+- ✅ **起動時に自動読み込み・常時有効**（トリガー不要）
+- ✅ 全ての会話・提案に適用される
 - ✅ ファイルパターンで条件分岐可能
+
+> **💡 InstructionsとSkillsの違い**
+>
+> - **Instructions** = AIが常に守るべきルール。起動時から常時有効。
+> - **Skills** = 特定タスクの手順書。呼ばれた時だけ有効。
+>
+> 「ブランチ命名規則」はInstructions、「記事Lintの手順」はSkillsに書く。
 
 ### 実装例
 
@@ -109,6 +116,13 @@ Claude Codeは `.github/copilot-instructions.md` を読みません。代わり�
 **コピペして使う定型質問テンプレート**
 
 頻繁に行う作業を効率化します。
+
+> **💡 PromptsとSkillsの違い**
+>
+> - **Prompts** = ユーザーが手動でAIに渡すテキストテンプレート。AIは受け取って実行するだけ。
+> - **Skills** = AIが「いつ使うか」を自分で判断できるパッケージ。自動発動・`/コマンド`呼び出しが可能。
+>
+> Promptsはシンプルで導入しやすい。Skillsはより高機能だが設定が必要。
 
 ### 特徴
 
@@ -166,11 +180,14 @@ Claude Codeは `.github/prompts/` を `/` メニューで呼び出す仕組み�
 
 複雑なタスクを自動化する再利用可能なパッケージです。
 
+Promptsとの最大の違いは「**AIが自分でいつ使うかを判断できる**」点です。`SKILL.md` の `description` を読んで、関連する依頼が来たときに自動発動します。
+
 ### 特徴
 
+- ✅ AIが `description` を見て自動発動（Promptsにはない機能）
+- ✅ `/skill-name` で直接呼び出しも可能
 - ✅ リソース同梱（スクリプト、テンプレート、ドキュメント）
-- ✅ [Agent Skills仕様](https://agentskills.io/)準拠
-- ✅ MCPと連携可能
+- ✅ [Agent Skills仕様](https://agentskills.io/)準拠（GitHub Copilot・Claude Code共通）
 
 ### ディレクトリ構造
 
@@ -195,22 +212,30 @@ Skillを使うと、複雑なタスクが自動化されます。
 1. 「記事をlintして」と依頼
 2. AIが依頼内容を解釈し、zenn-article-lint Skillを選択
 3. `npm run lint:md` を自動実行
-4. エラーを検出
-5. `common-errors.md` を参照して解決策を提示
-6. 自動修正コマンド (`npm run lint:md:fix`) を提案
+4. エラーを検出・解決策を提示
+5. 自動修正コマンド (`npm run lint:md:fix`) を提案
 
-**Skillの発動について**
+**スキルの呼び出し方（GitHub Copilot）：**
 
-- Skillは `SKILL.md` の `description` フィールドに基づいて発動
-- 完全一致でなくても、意味的に類似していれば発動することもある
-- 例: 「lint実行して」「記事チェックして」なども発動する可能性あり
-- より確実に発動させたい場合は、`/skill-name` で直接呼び出す
+1. **自動発動** — `description` に近い言葉で依頼するとCopilotが自動で使う
+
+   ```
+   「記事をlintして」      → /zenn-article-lint が発動
+   ```
+
+2. **直接呼び出し** — Copilot Chatで `/` と入力するとスキル一覧が表示される
+
+   ```
+   /zenn-article-lint
+   ```
 
 ### Claude Codeでの使い方
 
 > **✅ ネイティブ対応**
 
 Claude CodeはAgent Skills仕様に完全対応しています。
+
+**スキルの配置場所：**
 
 | パス | 対象 |
 | ---- | ---- |
@@ -220,7 +245,23 @@ Claude CodeはAgent Skills仕様に完全対応しています。
 
 **`.github/skills/` に置けば1つのSkillを両AIで共有できます。**
 
-Claude Codeでは `description` フィールドを見て自動的に関連するSkillを判断します。また `/skill-name` で直接呼び出すことも可能です。
+**スキルの呼び出し方（Claude Code）：**
+
+1. **自動発動** — `description` に近い言葉で依頼するとAIが自動で使う
+
+   ```
+   「記事をlintして」      → /zenn-article-lint が発動
+   「新規記事作りたい」    → /new-article が発動
+   「記事をレビューして」  → /article-review が発動
+   ```
+
+2. **直接呼び出し** — チャットで `/` と入力するとスキル一覧が表示される
+
+   ```
+   /zenn-article-lint
+   /new-article
+   /article-review
+   ```
 
 ---
 
