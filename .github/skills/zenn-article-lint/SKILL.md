@@ -1,72 +1,108 @@
 ---
 name: zenn-article-lint
-description: Zenn記事のMarkdownLintチェックと自動修正を行う
-version: 1.0.0
-author: GitHub Copilot User
-triggers:
-  - "lint"
-  - "記事をチェック"
-  - "Markdownlint"
-  - "記事を修正"
+description: Zenn記事のMarkdownLintチェックと自動修正を行う。「lintして」「記事をチェックして」「Markdownを修正して」などの依頼で使用。
 ---
 
 # Zenn Article Lint Skill
 
 Zenn記事のMarkdownLintチェックと自動修正を実行します。
 
-## 使い方
-
-### 基本的な使用
-
-ユーザーが以下のように依頼したときにこのSkillを使用：
-- 「記事をlintして」
-- 「Markdownをチェックして」
-- 「記事の品質をチェック」
-- 「lintエラーを修正して」
-
-### 実行手順
+## 実行手順
 
 1. **Lintチェック実行**
+
    ```bash
    npm run lint:md
    ```
 
 2. **エラーがある場合**
-   - エラー内容を解析
-   - 修正可能なものは `npm run lint:md:fix` で自動修正
-   - 手動修正が必要なものはユーザーに提案
+   - 自動修正できるものは `npm run lint:md:fix` を実行
+   - 手動修正が必要なものは下記のエラー一覧を参照して提案
 
-3. **エラーの種類と対処**
-
-   - `MD013` (line-length): 80文字を超える行
-     → 適切な位置で改行を提案
-   
-   - `MD040` (fenced-code-language): コードブロックに言語指定なし
-     → 適切な言語名を追加
-   
-   - `MD032` (blanks-around-lists): リスト前後に空行なし
-     → 空行を追加
-   
-   - `MD036` (no-emphasis-as-heading): 太字を見出しの代わりに使用
-     → 適切な見出しレベル（###）に変更
-
-4. **結果報告**
+3. **結果報告**
    - 修正した項目をリスト表示
-   - 残っているエラーがあれば説明
-   - 次のアクションを提案
+   - 残っているエラーがあれば説明と修正提案
 
-## 参考ファイル
+## よくあるエラーと修正方法
 
-- Lintルール: `.markdownlint-cli2.jsonc` および `.markdownlintrc`
-- 実行スクリプト: `package.json` の `scripts.lint:md`
+### MD013: 行が長すぎる（80文字超）
 
-## 例
+手動修正。適切な位置で改行する。
 
-**ユーザー**: 記事をlintして
+```markdown
+<!-- Before -->
+GitHub Copilotのカスタマイズ機能が充実してきた今、Instructions、Prompts、Skills、Agents、Hooks、Plugins、Cookbook Recipesといった様々な概念が登場しています。
 
-**AI**: 
-1. `npm run lint:md` を実行
-2. エラーを検出: MD013（行が長すぎる）x 3箇所
-3. 自動修正を実行: `npm run lint:md:fix`
-4. 結果: 2箇所自動修正、1箇所は手動修正が必要
-5. 手動修正の提案を表示
+<!-- After -->
+GitHub Copilotのカスタマイズ機能が充実してきた今、
+Instructions、Prompts、Skills、Agents、Hooks、Plugins、
+Cookbook Recipesといった様々な概念が登場しています。
+```
+
+### MD040: コードブロックに言語指定なし
+
+手動修正。適切な言語名を追加する。
+
+````markdown
+<!-- Before -->
+```
+git commit
+```
+
+<!-- After -->
+```bash
+git commit
+```
+````
+
+### MD032: リスト前後に空行なし
+
+自動修正可能（`npm run lint:md:fix`）。
+
+```markdown
+<!-- Before -->
+これはリスト：
+- 項目1
+- 項目2
+次の段落
+
+<!-- After -->
+これはリスト：
+
+- 項目1
+- 項目2
+
+次の段落
+```
+
+### MD031: コードブロック前後に空行なし
+
+自動修正可能（`npm run lint:md:fix`）。
+
+### MD036: 太字を見出しの代わりに使っている
+
+手動修正。適切な見出しレベルに変更する。
+
+```markdown
+<!-- Before -->
+**セクションタイトル**
+
+内容...
+
+<!-- After -->
+### セクションタイトル
+
+内容...
+```
+
+### MD060: テーブルのパイプ前後にスペースなし
+
+自動修正可能（`npm run lint:md:fix`）。
+
+## 自動修正できるエラー
+
+`npm run lint:md:fix` で修正可能：MD031、MD032、MD060
+
+## 手動修正が必要なエラー
+
+文脈の判断が必要：MD013（改行位置）、MD040（言語名）、MD036（見出しvs太字）
