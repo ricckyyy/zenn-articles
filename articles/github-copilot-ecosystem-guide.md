@@ -122,14 +122,6 @@ Instructionsを導入すると、AIの振る舞いが自動的に変わります
 3. `.github/copilot-prompts/new-article.md` を選択
 4. 記事の詳細（テーマ、タイトルなど）を入力して実行
 
-### ファイル名と配置の注意
-
-- Copilot Chatの`/`検索はファイル名をベースに候補を表示します。検索候補に出ない場合は、まずファイル名と配置を確認してください。
-- 推奨配置: `.github/copilot-prompts/` または `.github/prompts/` 配下に置くと見つけやすくなります。
-- 推奨命名: ファイル名に `prompt` を含める、または拡張子に `.prompt.md` を使うと `/test` のような短い検索語でも候補に出やすくなります（例: `new-article.prompt.md`, `test.prompt.md`）。
-- ファイルを保存してから Copilot Chat で `/` 検索してください。保存されていない編集中のファイルは候補に出ません。
-- それでも出ない場合は、VS Code のウィンドウ再読み込み（`Developer: Reload Window`）や Copilot 拡張の更新を試してください。
-
 ---
 
 ## 3. Skills（機能パック）
