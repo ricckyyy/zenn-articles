@@ -13,10 +13,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "zenn-cli": "^0.4.5"
+    "zenn-cli": "^0.4.7"
   },
   "devDependencies": {
-    "@types/markdownlint": "^0.13.0",
-    "markdownlint-cli2": "^0.21.0"
+    "@types/markdownlint": "^0.18.0",
+    "markdownlint-cli2": "^0.22.0"
   }
 }
