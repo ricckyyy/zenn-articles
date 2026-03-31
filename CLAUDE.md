@@ -1,48 +1,57 @@
-# Claude Code Instructions
+# CLAUDE.md
 
-## ブランチ運用ルール
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-このリポジトリはFeature Branch Workflow（機能ブランチワークフロー）を採用しています。
-
-### ブランチ命名規則
-
-- `article/[記事タイトル要約]` - 新規記事執筆
-- `update/[記事名]` - 既存記事の更新
-- `draft/[記事名]` - 下書き段階
-- `fix/[修正内容]` - 誤字脱字の修正
-
-### ワークフロー
-
-1. 作業開始時は必ず適切な名前のブランチを作成
-2. ブランチ上で記事を執筆・編集
-3. コミット前に `npm run lint:md` でLintチェック
-4. `npm run preview` でプレビュー確認
-5. Pull Requestを作成してレビュー
-6. 問題なければmainブランチにマージ
-
-### 注意事項
-
-- mainブランチへの直接コミットは避ける
-- 複数記事を並行作業する場合は、それぞれ別のブランチで管理
-- マージ後は作業ブランチを削除
-
-## Zenn記事のルール
-
-- 記事ファイルは `articles/` ディレクトリに配置
-- 画像は `images/[記事スラッグ]/` ディレクトリに配置
-- Markdownlintのルールに従う（`.markdownlint-cli2.jsonc` 参照）
-
-## よく使うコマンド
+## コマンド
 
 ```bash
-npm run lint:md        # Markdownlintチェック
+npm run lint:md        # Markdownlintチェック（articles/**/*.md が対象）
 npm run lint:md:fix    # 自動修正
-npm run preview        # プレビュー起動
-npx zenn new:article   # 新規記事作成
+npm run preview        # Zennプレビュー起動（localhost:8000）
+npx zenn new:article   # 新規記事作成（frontmatter付きファイルを自動生成）
 ```
 
-## 利用可能なSkills
+コミット前は必ず `npm run lint:md` を実行する。
 
-- `/new-article` - 新規記事の作成ワークフロー
-- `/article-review` - 記事のレビュー
-- `/zenn-article-lint` - Markdownlintチェックと自動修正（`.github/skills/` に配置）
+## ブランチ運用
+
+Feature Branch Workflow を採用。mainへの直接コミットは避ける。
+
+| プレフィックス | 用途 |
+| -------------- | ---- |
+| `article/` | 新規記事執筆 |
+| `update/` | 既存記事の更新 |
+| `draft/` | 下書き段階 |
+| `fix/` | 誤字脱字の修正 |
+
+## Zenn記事の構造
+
+- `articles/[slug].md` — 記事本体。frontmatterに `title`, `emoji`, `type`, `topics`, `published` が必要
+- `images/[slug]/` — 記事の画像置き場。画像パスは `/images/[slug]/xxx.png` の絶対パス形式のみ有効
+
+## Markdownlintカスタムルール
+
+`.markdownlint-cli2.jsonc` で設定。無効化しているルール：MD024, MD033, MD036, MD041。
+
+カスタムルール `.markdownlint/rules/image-path-rule.js` が以下を禁止：
+
+- `../images/` の相対パス → `/images/` に変換する
+- `images/` で始まるパス（先頭の `/` なし）→ `/images/` に変換する
+
+テーブルなど長い行が必要な場合は
+`<!-- markdownlint-disable MD013 -->` / `<!-- markdownlint-enable MD013 -->` で囲む。
+
+## Skills（呼び出し可能なコマンド）
+
+| スキル | 説明 |
+| ------ | ---- |
+| `/new-article` | 新規記事の作成ワークフロー（ブランチ作成〜ファイル生成） |
+| `/article-review` | 記事のレビュー（チェックリストに沿って実行） |
+| `/zenn-article-lint` | Markdownlintチェックと自動修正 |
+
+Skillファイルの配置：`.claude/skills/`（Claude Code専用）、`.github/skills/`（Copilotと共用）。
+
+## Git Hooks
+
+`.github/hooks/pre-commit` にpre-commit hookがある。
+セットアップは `.github/hooks/README.md` を参照。コミット時にMarkdownlintが自動実行される。
