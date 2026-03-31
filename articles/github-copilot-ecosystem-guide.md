@@ -8,6 +8,11 @@ published: true
 
 ## はじめに
 
+:::message
+**2026年3月 追記：** GitHub Copilotの `awesome-copilot` リポジトリから **Prompts** 機能が削除されました。
+本記事はこの変更を反映し、現在有効な **6つの機能** を解説しています。
+:::
+
 GitHub Copilotには、**Instructions、Skills、Agents、Hooks、Plugins、
 Cookbook Recipes**という6つのカスタマイズ機能があります。
 
