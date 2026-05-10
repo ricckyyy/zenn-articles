@@ -48,7 +48,9 @@ uvx --from git+https://github.com/github/spec-kit.git specify init --here
 初期化時に使用するAIエージェントを選択します。後から追加することも可能です。
 
 ```bash
-# Claude と Copilot を両方追加する場合
+# どちらか一方で初期化してから、もう一方を追加する
+uvx --from git+https://github.com/github/spec-kit.git specify init <project-name>
+uvx --from git+https://github.com/github/spec-kit.git specify add claude
 uvx --from git+https://github.com/github/spec-kit.git specify add copilot
 ```
 
