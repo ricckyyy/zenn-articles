@@ -84,20 +84,20 @@ CLAUDE.md                   # Claude Code 用プロジェクト指示
 ### スラッシュコマンドの対応表
 
 <!-- markdownlint-disable MD013 -->
-| ワークフロー | Claude Code | GitHub Copilot |
-| ------------ | ----------- | -------------- |
-| プロジェクト原則の定義 | `/speckit-constitution` | `/speckit.constitution` |
-| 仕様書の作成 | `/speckit-specify` | `/speckit.specify` |
-| 仕様の明確化 | `/speckit-clarify` | `/speckit.clarify` |
-| 実装計画の作成 | `/speckit-plan` | `/speckit.plan` |
-| タスク一覧の生成 | `/speckit-tasks` | `/speckit.tasks` |
-| 整合性チェック | `/speckit-analyze` | `/speckit.analyze` |
-| 実装の実行 | `/speckit-implement` | `/speckit.implement` |
-| チェックリスト生成 | `/speckit-checklist` | `/speckit.checklist` |
-| GitHub Issue への変換 | `/speckit-taskstoissues` | `/speckit.taskstoissues` |
+| ワークフロー | スラッシュコマンド |
+| ------------ | ----------------- |
+| プロジェクト原則の定義 | `/speckit-constitution` |
+| 仕様書の作成 | `/speckit-specify` |
+| 仕様の明確化 | `/speckit-clarify` |
+| 実装計画の作成 | `/speckit-plan` |
+| タスク一覧の生成 | `/speckit-tasks` |
+| 整合性チェック | `/speckit-analyze` |
+| 実装の実行 | `/speckit-implement` |
+| チェックリスト生成 | `/speckit-checklist` |
+| GitHub Issue への変換 | `/speckit-taskstoissues` |
 <!-- markdownlint-enable MD013 -->
 
-Claude Code はハイフン区切り（`speckit-xxx`）、Copilot はドット区切り（`speckit.xxx`）です。
+両方ともハイフン区切り（`speckit-xxx`）のスラッシュコマンドです。
 
 ### ステップ1: プロジェクト原則を定義する
 
