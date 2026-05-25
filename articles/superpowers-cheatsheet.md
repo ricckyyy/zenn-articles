@@ -74,3 +74,24 @@ flowchart TD
 | receiving-code-review | `/receiving-code-review` | レビュー指摘を盲目的に実装せず、技術的に検証してから対応する |
 | finishing-a-development-branch | `/finishing-a-development-branch` | マージ・squash・削除などの選択肢を整理して完了させる |
 <!-- markdownlint-enable MD013 -->
+
+## 付録: 全スキル一覧
+
+<!-- markdownlint-disable MD013 -->
+| スキル名 | コマンド | 発動タイミング |
+| -------- | -------- | -------------- |
+| brainstorming | `/brainstorming` | 新機能・変更を作る前（必須） |
+| writing-plans | `/writing-plans` | specが確定したら実装計画を作るとき |
+| using-git-worktrees | `/using-git-worktrees` | 実装開始前・ブランチ隔離が必要なとき |
+| test-driven-development | `/test-driven-development` | 実装コードを書く前（必須） |
+| executing-plans | `/executing-plans` | 別セッションで計画を実行するとき |
+| subagent-driven-development | `/subagent-driven-development` | 独立タスクを並列実行するとき |
+| dispatching-parallel-agents | `/dispatching-parallel-agents` | 2つ以上の独立タスクがあるとき |
+| systematic-debugging | `/systematic-debugging` | バグ・テスト失敗・予期しない挙動に直面したとき |
+| verification-before-completion | `/verification-before-completion` | 「完了」「修正済み」と言う前（必須） |
+| requesting-code-review | `/requesting-code-review` | 実装完了・マージ前のセルフレビュー |
+| receiving-code-review | `/receiving-code-review` | レビューコメントを受け取ったとき |
+| finishing-a-development-branch | `/finishing-a-development-branch` | 実装完了・マージ方法を決めるとき |
+| writing-skills | `/writing-skills` | 新しいスキルを作成・編集するとき |
+| using-superpowers | 自動（会話開始時） | セッション開始時に自動適用 |
+<!-- markdownlint-enable MD013 -->
