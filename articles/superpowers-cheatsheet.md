@@ -36,3 +36,21 @@ flowchart TD
 | verification-before-completion | `/verification-before-completion` | 「できた」と言う前にコマンド出力で確認する |
 | requesting-code-review | `/requesting-code-review` | マージ前のセルフレビューとレビュー依頼 |
 <!-- markdownlint-enable MD013 -->
+
+## ワークフロー2: バグを修正するとき
+
+```mermaid
+flowchart TD
+    A["/systematic-debugging\n仮説→観察→検証で根本原因を特定"] --> B["/test-driven-development\nバグを再現するテストを先に書く"]
+    B --> C["/verification-before-completion\n修正を証拠ベースで確認"]
+```
+
+### 各スキルの役割
+
+<!-- markdownlint-disable MD013 -->
+| スキル | コマンド | やること |
+| ------ | -------- | ------- |
+| systematic-debugging | `/systematic-debugging` | 思い込みで直す前に根本原因を特定するサイクルを強制する |
+| test-driven-development | `/test-driven-development` | バグを再現するテストを先に書き、修正後にグリーンになることを確認 |
+| verification-before-completion | `/verification-before-completion` | 「直った」と言う前に実際にコマンドで確認する |
+<!-- markdownlint-enable MD013 -->
