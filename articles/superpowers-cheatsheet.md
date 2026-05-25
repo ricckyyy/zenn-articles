@@ -54,3 +54,23 @@ flowchart TD
 | test-driven-development | `/test-driven-development` | バグを再現するテストを先に書き、修正後にグリーンになることを確認 |
 | verification-before-completion | `/verification-before-completion` | 「直った」と言う前に実際にコマンドで確認する |
 <!-- markdownlint-enable MD013 -->
+
+## ワークフロー3: PRを出してマージするとき
+
+```mermaid
+flowchart TD
+    A["/requesting-code-review\n自分でセルフレビューしてからPRを出す"] --> B{"レビューコメントが来た？"}
+    B -->|Yes| C["/receiving-code-review\n指摘を盲目的に実装せず技術的に検証"]
+    C --> B
+    B -->|承認| D["/finishing-a-development-branch\nマージ・クリーンアップの選択肢を提示"]
+```
+
+### 各スキルの役割
+
+<!-- markdownlint-disable MD013 -->
+| スキル | コマンド | やること |
+| ------ | -------- | ------- |
+| requesting-code-review | `/requesting-code-review` | PR作成前にセルフレビューのチェックリストを実行する |
+| receiving-code-review | `/receiving-code-review` | レビュー指摘を盲目的に実装せず、技術的に検証してから対応する |
+| finishing-a-development-branch | `/finishing-a-development-branch` | マージ・squash・削除などの選択肢を整理して完了させる |
+<!-- markdownlint-enable MD013 -->
