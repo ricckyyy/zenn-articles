@@ -62,7 +62,7 @@ joy: avg("p_joy", 30),
 stress: avg("p_stress", 100),
 ```
 
-正しいキー名はパラメータ定義エンドポイントで確認できます。
+正しいキー名は公式ドキュメントの[感情解析パラメータ一覧](https://docs.amivoice.com/amivoice-api/manual/reference-list-sentiment-analysis-parameters)、またはパラメータ定義エンドポイントで確認できます。
 
 <!-- markdownlint-disable MD013 -->
 ```bash
