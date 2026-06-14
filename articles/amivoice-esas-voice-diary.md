@@ -15,6 +15,12 @@ published: false
 
 録音を止めると3秒でテキストが表示され、50秒ほどで感情の20本バーが入ってきます。
 
+![録音画面](/images/amivoice-esas-voice-diary/recording.png)
+
+録音後、カレンダーから日付を選ぶと感情スコア20本が確認できます。
+
+![カレンダー画面と感情スコア](/images/amivoice-esas-voice-diary/calendar.png)
+
 **技術スタック：**
 
 - Next.js 16（App Router）
